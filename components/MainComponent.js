@@ -36,6 +36,31 @@ const mapDispatchToProps = {
   fetchPartners,
 };
 
+const LoginNavigator = createStackNavigator(
+  {
+    Login: { screen: Login },
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#5637DD",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        color: "#fff",
+      },
+      headerLeft: (
+        <Icon
+          name="sign-in"
+          type="font-awesome"
+          iconStyle={styles.stackIcon}
+          onPress={() => navigation.toggleDrawer()}
+        />
+      ),
+    }),
+  }
+);
+
 const ReservationNavigator = createStackNavigator(
   {
     Reservation: { screen: Reservation },
@@ -191,6 +216,27 @@ const ContactNavigator = createStackNavigator(
   }
 );
 
+const CustomDrawerContentComponent = (props) => (
+  <ScrollView>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: "always", horizontal: "never" }}
+    >
+      <View style={styles.drawerHeader}>
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require("./images/logo.png")}
+            style={styles.drawerImage}
+          />
+        </View>
+        <View style={{ flex: 2 }}>
+          <Text style={styles.drawerHeaderText}>NuCamp</Text>
+        </View>
+      </View>
+      <DrawerItems {...props} />
+    </SafeAreaView>
+  </ScrollView>
+);
 const MainNavigator = createDrawerNavigator(
   {
     Login: {
@@ -277,53 +323,6 @@ const MainNavigator = createDrawerNavigator(
 );
 
 const AppNavigator = createAppContainer(MainNavigator);
-
-const LoginNavigator = createStackNavigator(
-  {
-    Login: { screen: Login },
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      headerStyle: {
-        backgroundColor: "#5637DD",
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        color: "#fff",
-      },
-      headerLeft: (
-        <Icon
-          name="sign-in"
-          type="font-awesome"
-          iconStyle={styles.stackIcon}
-          onPress={() => navigation.toggleDrawer()}
-        />
-      ),
-    }),
-  }
-);
-
-const CustomDrawerContentComponent = (props) => (
-  <ScrollView>
-    <SafeAreaView
-      style={styles.container}
-      forceInset={{ top: "always", horizontal: "never" }}
-    >
-      <View style={styles.drawerHeader}>
-        <View style={{ flex: 1 }}>
-          <Image
-            source={require("./images/logo.png")}
-            style={styles.drawerImage}
-          />
-        </View>
-        <View style={{ flex: 2 }}>
-          <Text style={styles.drawerHeaderText}>NuCamp</Text>
-        </View>
-      </View>
-      <DrawerItems {...props} />
-    </SafeAreaView>
-  </ScrollView>
-);
 
 class Main extends Component {
   componentDidMount() {
